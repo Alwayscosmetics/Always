@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ALWAYS | Beauty & Care</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial, sans-serif;
+  background:#faf9f6;
+  color:#1d1d1d;
+}
+
+.announcement{
+  background:#1f3b2d;
+  color:white;
+  text-align:center;
+  padding:10px;
+  font-size:13px;
+  font-weight:bold;
+  letter-spacing:.5px;
+}
+
+header{
+  background:white;
+  padding:18px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #eee;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.logo{
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:5px;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+nav a{
+  text-decoration:none;
+  color:#222;
+  font-size:14px;
+}
+
+.cart-icon{
+  cursor:pointer;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.hero{
+  min-height:500px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:50px 20px;
+  background:linear-gradient(135deg,#f3eee4,#e6efe5);
+}
+
+.hero-content{
+  max-width:700px;
+}
+
+.hero h1{
+  font-size:65px;
+  letter-spacing:9px;
+  margin-bottom:15px;
+}
+
+.hero p{
+  font-size:18px;
+  color:#555;
+  line-height:1.6;
+  margin-bottom:28px;
+}
+
+.btn{
+  background:#1f3b2d;
+  color:white;
+  border:none;
+  padding:14px 25px;
+  border-radius:30px;
+  cursor:pointer;
+  font-size:14px;
+  text-decoration:none;
+  display:inline-block;
+  transition:.3s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.section{
+  padding:70px 6%;
+}
+
+.section-title{
+  text-align:center;
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+.section-subtitle{
+  text-align:center;
+  color:#777;
+  margin-bottom:45px;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:25px;
+}
+
+.product-card{
+  background:white;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
+  position:relative;
+  transition:.3s;
+}
+
+.product-card:hover{
+  transform:translateY(-5px);
+}
+
+.badge{
+  position:absolute;
+  top:12px;
+  left:12px;
+  background:#1f3b2d;
+  color:white;
+  padding:7px 10px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:bold;
+  z-index:2;
+}
+
+.product-image{
+  width:100%;
+  height:260px;
+  background:#f2f0eb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:15px;
+}
+
+.placeholder{
+  font-size:70px;
+}
+
+.product-info{
+  padding:20px;
+}
+
+.product-info h3{
+  font-size:18px;
+  margin-bottom:8px;
+}
+
+.description{
+  color:#777;
+  font-size:13px;
+  line-height:1.5;
+  min-height:40px;
+}
+
+.price-box{
+  margin:15px 0;
+}
+
+.mrp{
+  color:#888;
+  text-decoration:line-through;
+  font-size:13px;
+  margin-right:8px;
+}
+
+.price{
+  font-size:21px;
+  font-weight:bold;
+  color:#1f3b2d;
+}
+
+.save{
+  color:#148a42;
+  font-size:12px;
+  font-weight:bold;
+  margin-left:6px;
+}
+
+.product-info .btn{
+  width:100%;
+}
+
+.offer-section{
+  background:#1f3b2d;
+  color:white;
+  text-align:center;
+  padding:55px 20px;
+}
+
+.offer-section h2{
+  font-size:30px;
+  margin-bottom:12px;
+}
+
+.features{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:25px;
+  text-align:center;
+}
+
+.feature{
+  padding:25px;
+}
+
+.feature-icon{
+  font-size:35px;
+  margin-bottom:10px;
+}
+
+.cart-panel{
+  position:fixed;
+  top:0;
+  right:-450px;
+  width:400px;
+  max-width:100%;
+  height:100vh;
+  background:white;
+  z-index:2000;
+  box-shadow:-5px 0 25px rgba(0,0,0,.15);
+  transition:.4s;
+  padding:25px;
+  overflow-y:auto;
+}
+
+.cart-panel.active{
+  right:0;
+}
+
+.cart-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+.close{
+  font-size:25px;
+  cursor:pointer;
+}
+
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 0;
+  border-bottom:1px solid #eee;
+  gap:10px;
+}
+
+.cart-item-name{
+  font-weight:bold;
+  font-size:14px;
+}
+
+.quantity{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.qty-btn{
+  width:28px;
+  height:28px;
+  border:none;
+  background:#eee;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+.remove{
+  border:none;
+  background:none;
+  color:#c0392b;
+  cursor:pointer;
+  font-size:12px;
+}
+
+.cart-summary{
+  margin-top:25px;
+}
+
+.progress-box{
+  background:#f3f3f3;
+  padding:14px;
+  border-radius:10px;
+  margin:15px 0;
+  font-size:13px;
+}
+
+.total-row{
+  display:flex;
+  justify-content:space-between;
+  font-size:20px;
+  font-weight:bold;
+  margin:20px 0;
+}
+
+.empty-cart{
+  text-align:center;
+  color:#888;
+  margin-top:60px;
+}
+
+footer{
+  background:#111;
+  color:white;
+  padding:50px 6%;
+  text-align:center;
+}
+
+footer h2{
+  letter-spacing:5px;
+  margin-bottom:12px;
+}
+
+footer p{
+  color:#bbb;
+  font-size:14px;
+}
+
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:white;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  font-size:27px;
+  box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+@media(max-width:600px){
+
+  header{
+    padding:15px 5%;
+  }
+
+  .logo{
+    font-size:22px;
+    letter-spacing:4px;
+  }
+
+  nav a{
+    display:none;
+  }
+
+  .hero{
+    min-height:420px;
+  }
+
+  .hero h1{
+    font-size:45px;
+    letter-spacing:6px;
+  }
+
+  .section{
+    padding:55px 5%;
+  }
+
+  .cart-panel{
+    width:100%;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="announcement">
+🚚 FREE DELIVERY ON ORDERS ABOVE ₹499
+</div>
+
+<header>
+
+<div class="logo">ALWAYS</div>
+
+<nav>
+<a href="#">HOME</a>
+<a href="#shop">SHOP</a>
+<a href="#about">ABOUT</a>
+<span class="cart-icon" onclick="openCart()">🛒 <span id="cart-count">0</span></span>
+</nav>
+
+</header>
+
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>ALWAYS</h1>
+
+<p>Premium Beauty & Personal Care Products Made For Your Everyday Routine.</p>
+
+<a href="#shop" class="btn">SHOP NOW</a>
+
+</div>
+
+</section>
+
+
+<section class="section" id="shop">
+
+<h2 class="section-title">Shop Our Products</h2>
+
+<p class="section-subtitle">
+Discover quality products and special offers from ALWAYS.
+</p>
+
+
+<div class="products">
+
+
+<!-- ROSE WATER -->
+
+<div class="product-card">
+
+<div class="badge">34% OFF</div>
+
+<div class="product-image">
+<span class="placeholder">🌹</span>
+
+<!-- PHOTO ADD KARNE KE BAAD:
+<img src="images/rose-water.jpg" alt="ALWAYS Rose Water">
+-->
+
+</div>
+
+<div class="product-info">
+
+<h3>ALWAYS Rose Water</h3>
+
+<p class="description">
+A refreshing addition to your daily skincare routine.
+</p>
+
+<div class="price-box">
+
+<span class="mrp">₹75</span>
+
+<span class="price">₹49</span>
+
+<span class="save">SAVE ₹26</span>
+
+</div>
+
+<button class="btn"
+onclick="addToCart('ALWAYS Rose Water',49)">
+ADD TO CART
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- MULTANI MITTI -->
+
+<div class="product-card">
+
+<div class="badge">FREE ROSE WATER 🎁</div>
+
+<div class="product-image">
+
+<span class="placeholder">🌿</span>
+
+<!--
+<img src="images/multani-mitti.jpg" alt="ALWAYS Multani Mitti">
+-->
+
+</div>
+
+<div class="product-info">
+
+<h3>ALWAYS Multani Mitti</h3>
+
+<p class="description">
+Special combo offer with FREE Rose Water included.
+</p>
+
+<div class="price-box">
+
+<span class="price">₹60</span>
+
+<span class="save">+ FREE ROSE WATER</span>
+
+</div>
+
+<button class="btn"
+onclick="addToCart('ALWAYS Multani Mitti + Free Rose Water',60)">
+ADD TO CART
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- HAND WASH -->
+
+<div class="product-card">
+
+<div class="badge">45% OFF</div>
+
+<div class="product-image">
+
+<span class="placeholder">🧴</span>
+
+<!--
+<img src="images/hand-wash.jpg" alt="ALWAYS Hand Wash">
+-->
+
+</div>
+
+<div class="product-info">
+
+<h3>ALWAYS Hand Wash</h3>
+
+<p class="description">
+Gentle everyday cleansing for clean and fresh hands.
+</p>
+
+<div class="price-box">
+
+<span class="mrp">₹235</span>
+
+<span class="price">₹129</span>
+
+<span class="save">SAVE ₹106</span>
+
+</div>
+
+<button class="btn"
+onclick="addToCart('ALWAYS Hand Wash',129)">
+ADD TO CART
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- CLEANSING MILK -->
+
+<div class="product-card">
+
+<div class="badge">50% OFF</div>
+
+<div class="product-image">
+
+<span class="placeholder">✨</span>
+
+<!--
+<img src="images/cleansing-milk.jpg" alt="ALWAYS Cleansing Milk">
+-->
+
+</div>
+
+<div class="product-info">
+
+<h3>ALWAYS Cleansing Milk</h3>
+
+<p class="description">
+A gentle addition to your daily cleansing routine.
+</p>
+
+<div class="price-box">
+
+<span class="mrp">₹199</span>
+
+<span class="price">₹99</span>
+
+<span class="save">SAVE ₹100</span>
+
+</div>
+
+<button class="btn"
+onclick="addToCart('ALWAYS Cleansing Milk',99)">
+ADD TO CART
+</button>
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<section class="offer-section">
+
+<h2>🎁 Special Offers From ALWAYS</h2>
+
+<p>Shop your favourite products and enjoy exclusive value offers.</p>
+
+</section>
+
+
+
+<section class="section" id="about">
+
+<h2 class="section-title">Why Choose ALWAYS?</h2>
+
+<div class="features">
+
+<div class="feature">
+
+<div class="feature-icon">🌿</div>
+
+<h3>Quality Products</h3>
+
+<p>Made with care for your everyday personal care needs.</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">🚚</div>
+
+<h3>Free Delivery</h3>
+
+<p>Get FREE delivery on orders above ₹499.</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">🛍️</div>
+
+<h3>Easy Shopping</h3>
+
+<p>Add products to your cart and place your order easily.</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- CART -->
+
+<div class="cart-panel" id="cart-panel">
+
+<div class="cart-header">
+
+<h2>Your Cart 🛒</h2>
+
+<span class="close" onclick="closeCart()">×</span>
+
+</div>
+
+<div id="cart-items">
+
+<div class="empty-cart">
+Your cart is empty 🛒
+</div>
+
+</div>
+
+<div class="cart-summary">
+
+<div class="progress-box" id="delivery-message">
+Add products to start shopping.
+</div>
+
+<div class="total-row">
+
+<span>Total</span>
+
+<span id="cart-total">₹0</span>
+
+</div>
+
+<button class="btn" style="width:100%;" onclick="checkout()">
+PLACE ORDER ON WHATSAPP
+</button>
+
+</div>
+
+</div>
+
+
+
+<a class="whatsapp"
+href="https://wa.me/918697518242"
+target="_blank">☎</a>
+
+
+
+<footer>
+
+<h2>ALWAYS</h2>
+
+<p>Beauty & Personal Care</p>
+
+<br>
+
+<p>© 2026 ALWAYS. All Rights Reserved.</p>
+
+</footer>
+
+
+
+<script>
+
+let cart = [];
+
+
+/* ADD PRODUCT */
+
+function addToCart(name,price){
+
+let existingProduct = cart.find(item => item.name === name);
+
+if(existingProduct){
+
+existingProduct.quantity++;
+
+}else{
+
+cart.push({
+name:name,
+price:price,
+quantity:1
+});
+
+}
+
+updateCart();
+
+openCart();
+
+}
+
+
+/* UPDATE CART */
+
+function updateCart(){
+
+let cartItems = document.getElementById("cart-items");
+
+let total = 0;
+
+let count = 0;
+
+
+if(cart.length === 0){
+
+cartItems.innerHTML =
+'<div class="empty-cart">Your cart is empty 🛒</div>';
+
+}else{
+
+cartItems.innerHTML = "";
+
+cart.forEach((item,index)=>{
+
+let itemTotal = item.price * item.quantity;
+
+total += itemTotal;
+
+count += item.quantity;
+
+
+cartItems.innerHTML += `
+
+<div class="cart-item">
+
+<div>
+
+<div class="cart-item-name">
+${item.name}
+</div>
+
+<div>₹${item.price} × ${item.quantity}</div>
+
+<button class="remove"
+onclick="removeItem(${index})">
+Remove
+</button>
+
+</div>
+
+
+<div class="quantity">
+
+<button class="qty-btn"
+onclick="changeQuantity(${index},-1)">
+−
+</button>
+
+<span>${item.quantity}</span>
+
+<button class="qty-btn"
+onclick="changeQuantity(${index},1)">
++
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+document.getElementById("cart-count").innerText = count;
+
+document.getElementById("cart-total").innerText = "₹" + total;
+
+
+/* FREE DELIVERY MESSAGE */
+
+let deliveryMessage =
+document.getElementById("delivery-message");
+
+
+if(total === 0){
+
+deliveryMessage.innerText =
+"Add products to start shopping.";
+
+}else if(total >= 499){
+
+deliveryMessage.innerHTML =
+"🎉 Congratulations! You unlocked FREE DELIVERY!";
+
+}else{
+
+let remaining = 499-total;
+
+deliveryMessage.innerHTML =
+"Add ₹"+remaining+" more to get FREE DELIVERY 🚚";
+
+}
+
+}
+
+
+/* CHANGE QUANTITY */
+
+function changeQuantity(index,change){
+
+cart[index].quantity += change;
+
+if(cart[index].quantity <= 0){
+
+cart.splice(index,1);
+
+}
+
+updateCart();
+
+}
+
+
+/* REMOVE ITEM */
+
+function removeItem(index){
+
+cart.splice(index,1);
+
+updateCart();
+
+}
+
+
+/* OPEN CART */
+
+function openCart(){
+
+document.getElementById("cart-panel")
+.classList.add("active");
+
+}
+
+
+/* CLOSE CART */
+
+function closeCart(){
+
+document.getElementById("cart-panel")
+.classList.remove("active");
+
+}
+
+
+/* WHATSAPP CHECKOUT */
+
+function checkout(){
+
+if(cart.length === 0){
+
+alert("Your cart is empty!");
+
+return;
+
+}
+
+
+let message =
+"Hello ALWAYS! I want to place an order.%0A%0A";
+
+
+let total = 0;
+
+
+cart.forEach(item=>{
+
+let itemTotal =
+item.price * item.quantity;
+
+message +=
+item.name +
+"%0AQuantity: " +
+item.quantity +
+"%0APrice: ₹" +
+itemTotal +
+"%0A%0A";
+
+total += itemTotal;
+
+});
+
+
+message +=
+"*ORDER TOTAL: ₹" +
+total +
+"*%0A";
+
+
+if(total >= 499){
+
+message +=
+"%0AFree Delivery: YES 🎉";
+
+}else{
+
+message +=
+"%0ADelivery: To be confirmed";
+
+}
+
+
+window.open(
+"https://wa.me/918697518242?text="+message,
+"_blank"
+);
+
+}
+
+</script>
+
+</body>
+</html>
